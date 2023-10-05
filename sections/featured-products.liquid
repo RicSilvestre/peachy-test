@@ -1,0 +1,44 @@
+<div
+  data-section-type="featured-products"
+  data-section-id="{{ section.id }}"
+  class="desktop:max-w-8xl m-auto">
+  {% if section.settings.title != blank %}
+    <h2 class="text-center text-[44px] mb-16 md:mb-6 md:text-[66px] leading-none font-adorn-condensed-sans ">{{ section.settings.title }}</h2>
+  {% endif %}
+  {% if section.settings.products != blank %}
+  <div class="swiper">
+    <div class="md:grid swiper-wrapper md:gap-8 mb-6 grid-cols-peachy-section">
+      {% for product in section.settings.products %}
+        <div class="swiper-slide h-auto p-5 rounded-xl border-4 border-bg_1 bg-bg_2">
+          {% render "product-grid-item", product: product %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-pagination md:hidden static"></div>
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Products",
+    "tag": "section",
+    "class": "p-10",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section title"
+      },
+      {
+        "type": "product_list",
+        "id": "products",
+        "label": "Selected products"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Products"
+      }
+    ]
+  }
+{% endschema %}
