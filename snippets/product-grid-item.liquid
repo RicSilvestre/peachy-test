@@ -1,5 +1,5 @@
 <form
-  action="/cart/add"
+  action="/cart/add" data-productid="{{ product.id }}"
   method="post"
   data-cart-submit
   class="h-full flex flex-col">
@@ -10,7 +10,7 @@
   <variant-swatch class="flex flex-col grow justify-end">
     
     {% if product.variants.size > 1 %}
-      <select class="font-futura bg-transparent mb-6 bg-transparent border-b-bg_1 border-b text-lg pb-2" name="id">
+      <select class="font-futura bg-transparent mb-6 bg-transparent border-b-bg_1 border-b text-lg pb-2" name="id" data-productid="{{ product.id }}">
         {% for variant in product.variants %}
           <option data-price="{{ variant.price | money }}" class="text-lg bg-bg_2" value="{{ variant.id }}">
             {{ variant.title }}
@@ -20,7 +20,7 @@
     {% else %}
       <input
         type="hidden"
-        name="id"
+        name="id" data-productid="{{ product.id }}"
         value="{{ product.selected_or_first_available_variant.id }}">
     {% endif %}
     <button class="btn-atc" type="submit"><span class="current-price">{{ product.selected_or_first_available_variant.price | money }}</span> | add to cart</button>
